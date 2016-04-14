@@ -1,0 +1,73 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  
+#  config.vm.define "consul01" do |c1|
+#    c1.vm.box = "ubuntu/trusty64"
+#    c1.vm.hostname = "consul01"
+#    c1.vm.network :private_network, ip: "192.168.56.102"
+#    c1.vm.provider :virtualbox do |v|
+#      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+#      v.customize ["modifyvm", :id, "--memory", 512]
+#      v.customize ["modifyvm", :id, "--name", "consul01"]
+#    end
+#    c1.ssh.insert_key = false
+#    c1.vm.provision "ansible" do |a|
+#      a.verbose = "v"
+#      a.playbook = "../ansible/consul.yml"
+#    end
+#  end
+#
+  config.vm.define "swarm01" do |b1|
+    b1.vm.box = "ubuntu/trusty64"
+    b1.vm.hostname = "swarm01"
+    b1.vm.network :private_network, ip: "192.168.56.110"
+    b1.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "swarm01"]
+    end
+    b1.ssh.insert_key = false
+    b1.vm.provision "ansible" do |a|
+      a.verbose = "v"
+      a.playbook = "../ansible/docker.yml"
+    end
+  end
+
+  config.vm.define "swarm02" do |b2|
+    b2.vm.box = "ubuntu/trusty64"
+    b2.vm.hostname = "swarm02"
+    b2.vm.network :private_network, ip: "192.168.56.111"
+    b2.vm.provider :virtualbox do |v|
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--memory", 512]
+      v.customize ["modifyvm", :id, "--name", "swarm02"]
+    end
+    b2.ssh.insert_key = false
+    b2.vm.provision "ansible" do |a|
+      a.verbose = "v"
+      a.playbook = "../ansible/docker.yml"
+    end
+  end
+
+# Provider-specific configuration so you can fine-tune various
+  # backing providers for Vagrant. These expose provider-specific options.
+  # Example for VirtualBox:
+  #
+  # config.vm.provider "virtualbox" do |vb|
+  #   # Display the VirtualBox GUI when booting the machine
+  #   vb.gui = true
+  #
+  #   # Customize the amount of memory on the VM:
+  #   vb.memory = "1024"
+  # end
+  #
+  # View the documentation for the provider you are using for more
+  # information on available options.
+
+  # config.vm.provision "shell", inline: <<-SHELL
+  #   sudo apt-get update
+  #   sudo apt-get install -y apache2
+  # SHELL
+end
