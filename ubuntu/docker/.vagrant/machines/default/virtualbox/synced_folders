@@ -1,1 +1,0 @@
-{"virtualbox":{"/vagrant/src":{"guestpath":"/vagrant/src","hostpath":"/Users/lsmith/src","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/Users/lsmith/src/vagrant/ubuntu/docker","disabled":false,"__vagrantfile":true}}}
